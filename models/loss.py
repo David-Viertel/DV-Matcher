@@ -1327,8 +1327,32 @@ class GraphDeformLoss_Neural(nn.Module):
     def forward(self,feat1,feat2, dist1, dist2, verts1, verts2,alpha_i,deformer):
         loss = 0
         if self.w_dist > 0:
-            k = self.k_dist
-            N = self.N_dist
+            # k = self.k_dist
+            # N = self.N_dist
+
+
+
+            #MY BOOTLEG SOLUTION
+
+            if verts1.shape[1] < self.N_dist or verts2.shape[1] < self.N_dist:
+                if verts1.shape[1] < verts2.shape[1]:
+                    N = verts1.shape[1] - 5
+                else:
+                    N = verts2.shape[1] - 5
+            else:
+                N = self.N_dist
+
+            if verts1.shape[1] < self.k_dist or verts2.shape[1] < self.k_dist:
+                if verts1.shape[1] < verts2.shape[1]:
+                    k = verts1.shape[1] - 10
+                else:
+                    k = verts2.shape[1] - 10            
+            else:
+                k = self.k_dist
+
+
+
+                
             batch_size = dist1.shape[0]
         
             num1 = dist1.shape[1]
