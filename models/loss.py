@@ -914,18 +914,7 @@ class GraphDeformLoss_Neural_Partial(nn.Module):
         n = str(random.randint(0, 10))
         print(f"Rand:{n}, Deform_Result: cd_loss:{self.chamfer_loss(deformed_points1,verts2)*self.w_cd}, arap_loss:{arap_all_loss12*self.w_arap}")
         
-        save_path_t = 'visual_result/' + self.save_name
-        if not os.path.exists(save_path_t):
-            os.makedirs(save_path_t)
-                
-        PC1 = deformed_points1[0].detach().cpu().squeeze().numpy()
-        save_off_file(save_path_t + '/deform_'+ n +'.off', PC1)
-        PC2 = verts2[0].detach().cpu().squeeze().numpy()
-        save_off_file(save_path_t + '/target_'+ n +'.off', PC2)
-        PC3 = verts1[0].detach().cpu().squeeze().numpy()
-        save_off_file(save_path_t + '/source_'+ n +'.off', PC3)
-        PC12 = verts12[0].detach().cpu().squeeze().numpy()
-        save_off_file(save_path_t + '/pi_verts2_'+ n +'.off', PC12)
+        # Geometry exports belong to prediction/evaluation scripts only.
         return cross_deform_loss12, self_rec_loss12
     
     def pcd2img(self,x):
@@ -1281,18 +1270,7 @@ class GraphDeformLoss_Neural(nn.Module):
         n = str(random.randint(0, 10))
         print(f"Rand:{n}, Deform_Result: cd_loss:{self.chamfer_loss(deformed_points1,verts2)*self.w_cd}, arap_loss:{arap_all_loss12*self.w_arap}")
         
-        save_path_t = 'visual_result/' + self.save_name
-        if not os.path.exists(save_path_t):
-            os.makedirs(save_path_t)
-                
-        PC1 = deformed_points1[0].detach().cpu().squeeze().numpy()
-        save_off_file(save_path_t + '/deform_'+ n +'.off', PC1)
-        PC2 = verts2[0].detach().cpu().squeeze().numpy()
-        save_off_file(save_path_t + '/target_'+ n +'.off', PC2)
-        PC3 = verts1[0].detach().cpu().squeeze().numpy()
-        save_off_file(save_path_t + '/source_'+ n +'.off', PC3)
-        PC12 = verts12[0].detach().cpu().squeeze().numpy()
-        save_off_file(save_path_t + '/pi_verts2_'+ n +'.off', PC12)
+        # Geometry exports belong to prediction/evaluation scripts only.
         return map_loss12, cross_deform_loss12, self_rec_loss12
     
     def pcd2img(self,x):

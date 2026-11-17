@@ -31,7 +31,7 @@ def figure_show(imgs):
         img = img.cpu().numpy()
         plt.figure()
         plt.imshow(np.moveaxis(img, 0, -1))  # 多通道RGB图像
-        plt.savefig('image/image_'+str(i)+'.png')
+        # Image exports belong to prediction/evaluation scripts only.
         plt.close()
 
 def index_points_idx(points, idx):
@@ -925,8 +925,7 @@ class Uni3FC_DINO_proj(nn.Module):
         ax[3].imshow(fr_feats_pca[0].permute(1, 2, 0).detach().cpu())
         ax[3].set_title("Up-downsampled Features")
         remove_axes(ax)
-        plt.savefig('image/feat_img0.png')
-        print('save successfully!')
+        # Image exports belong to prediction/evaluation scripts only.
         plt.close(fig)  # 关闭图形，释放内存
 
     def get_colored_depth_maps(self,raw_depths,H,W):
